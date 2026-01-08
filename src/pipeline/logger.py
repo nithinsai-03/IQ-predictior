@@ -2,8 +2,9 @@ import logging
 import os
 from datetime import datetime
 
-# Create logs directory
-LOG_DIR = os.path.join(os.getcwd(), "logs")
+# Create logs directory - use project root
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+LOG_DIR = os.path.join(PROJECT_ROOT, "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
 # Log file name

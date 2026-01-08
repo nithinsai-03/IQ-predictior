@@ -9,11 +9,13 @@ from dataclasses import dataclass
 
 
 #data ingestion config
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 @dataclass
 class DataingestionConfig:
-    train_data_path : str=os.path.join('artifacts',"train.csv")
-    test_data_path : str=os.path.join('artifacts',"test.csv")
-    raw_data_path : str=os.path.join('artifacts',"raw.csv")
+    train_data_path : str=os.path.join(PROJECT_ROOT, 'artifacts',"train.csv")
+    test_data_path : str=os.path.join(PROJECT_ROOT, 'artifacts',"test.csv")
+    raw_data_path : str=os.path.join(PROJECT_ROOT, 'artifacts',"raw.csv")
 
 
 
@@ -24,7 +26,7 @@ class Dataingestion:
     def initiate_data_ingestion(self):
         logging.info("entered the data ingestion method or component")
         try:
-            df=pd.read_csv("notebook/Data/stud.csv")
+            df=pd.read_csv(os.path.join(PROJECT_ROOT, "notebook/Data/stud.csv"))
             logging.info("Read the dataset as dataframe")
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
