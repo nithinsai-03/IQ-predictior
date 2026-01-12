@@ -8,6 +8,15 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
 
+from src.components.data_transformation import Datatransformation
+from src.components.data_transformation import DataTransformationConfig
+
+
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
+
+
 #data ingestion config
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -55,7 +64,14 @@ class Dataingestion:
 
 if __name__== "__main__":
     obj= Dataingestion()
-    obj.initiate_data_ingestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+    
+
+    data_transformation=Datatransformation()
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+
+    modeltrainer=ModelTrainer()
+    print(modeltrainer.initate_model_trainer(train_arr,test_arr))
 
 
 
